@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chance.dao.TaskStatusMapper">
+	<insert id="addTaskStatus" parameterType="TaskStatus">
+		INSERT INTO task_status(md5, code, message, total, finished, status)
+		VALUES(#{md5}, #{code}, #{message}, #{total}, #{finished}, #{status});
+	</insert>
+	<select id="selectTaskStatus" parameterType="String" resultType="TaskStatus">
+		select * from task_status where md5 = #{md5};
+	</select>
+	<update id="updateCodeMessageAndStatus">
+		update task_status set code=#{0}, message=#{1}, status=#{2} where md5=#{3};
+	</update>
+	<update id="updateTotal">
+		update task_status set total=#{0} where md5=#{1};
+	</update>
+	<update id="updateFinished">
+		update task_status set finished=#{0} where md5=#{1};
+	</update>
+</mapper>

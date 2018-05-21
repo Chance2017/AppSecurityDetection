@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chance.dao.JavaCodeRiskMapper">
+	
+	<!-- 实现数据库字段名到类中属性名的映射 -->
+	<resultMap type="JavaCodeRisk" id="JavaCodeRiskMap">
+		<id column="id" property="id"/>
+		<result column="md5" property="md5"/>
+		<result column="risk_name" property="riskName"/>
+		<result column="package_name" property="packageName"/>
+		<result column="class_name" property="className"/>
+		<result column="superclass_name" property="superClassName"/>
+		<result column="method_name" property="methodName"/>
+		<result column="line_number" property="lineNumber"/>
+		<result column="risk_exist" property="riskExist"/>
+	</resultMap>
+
+	<!-- 添加java代码风险信息 -->
+	<insert id="addJavaCodeRisk" parameterType="JavaCodeRisk" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO javacode_risk(md5, risk_name, package_name, class_name, superclass_name, method_name, line_number)
+		VALUES(#{md5}, #{riskName}, #{packageName}, #{className}, #{superClassName}, #{methodName}, #{lineNumber});
+	</insert>
+	<!-- 根据MD5值查询java代码风险信息 -->
+	<select id="selectJavaCodeRisksByMD5" parameterType="String" resultMap="JavaCodeRiskMap">
+		select * from javacode_risk where md5=#{md5};
+	</select>
+	<!-- 根据MD5值和对应风险查询java代码风险信息 -->
+	<select id="selectJavaCodeRisksByMD5AndRiskname" resultMap="JavaCodeRiskMap">
+		select * from javacode_risk where md5=#{0} and risk_name=#{1};
+	</select>
+	<update id="updateRiskExist" parameterType="JavaCodeRisk">
+		update javacode_risk set risk_exist='0' where md5=#{md5} and risk_name=#{riskName};
+	</update>
+	
+</mapper>

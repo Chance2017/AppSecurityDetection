@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+  	<!-- 引入外部数据库配置文件 -->
+ 	<properties resource="dbconfig.properties"></properties>
+ 	
+ 	<!-- 设置别名，便于后面引用 -->
+ 	<typeAliases>
+ 		<typeAlias type="com.chance.entities.Apk" alias="apk"/>
+ 		<typeAlias type="com.chance.entities.ApkInfo" alias="ApkInfo"/>
+ 		<typeAlias type="com.chance.entities.ManifestRisk" alias="ManifestRisk"/>
+ 		<typeAlias type="com.chance.entities.JavaCodeRisk" alias="JavaCodeRisk"/>
+ 		<typeAlias type="com.chance.entities.TaskStatus" alias="TaskStatus"/>
+ 	</typeAliases>
+ 	
+ 	<!-- 配置MyBatis数据库环境 -->
+  	<environments default="development">
+  		<environment id="development">
+  			<transactionManager type="JDBC"></transactionManager>
+  			<dataSource type="POOLED">
+  				<!-- 配置连接池信息 -->
+  				<property name="driver" value="${driver}"/>
+ 				<property name="url" value="${url}"/>
+ 				<property name="username" value="${username}"/>
+ 				<property name="password" value="${password}"/>
+  			</dataSource>
+  		</environment>
+  	</environments>
+  	<!-- 注册接口的映射文件 -->
+  	<mappers>
+  		<mapper resource="mybatis/mapper/ApkMapper.xml"/>
+  		<mapper resource="mybatis/mapper/ApkInfoMapper.xml"/>
+  		<mapper resource="mybatis/mapper/ManifestRiskMapper.xml"/>
+  		<mapper resource="mybatis/mapper/JavaCodeRiskMapper.xml"/>
+  		<mapper resource="mybatis/mapper/TaskStatusMapper.xml"/>
+  	</mappers>
+  	
+  </configuration>

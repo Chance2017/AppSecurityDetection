@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chance.dao.ApkInfoMapper">
+	
+	<!-- 实现数据库字段名到类中属性名的映射 -->
+	<resultMap type="ApkInfo" id="ApkInfoMap">
+		<id column="id" property="id"/>
+		<result column="md5" property="md5"/>
+		<result column="version" property="version"/>
+		<result column="app_name" property="appName"/>
+		<result column="package_name" property="packageName"/>
+		<result column="date" property="date"/>
+	</resultMap>
+
+	<insert id="addApkInfo" parameterType="ApkInfo">
+		INSERT INTO apkinfo(md5, version, app_name, package_name)
+		VALUES(#{md5}, #{version}, #{appName}, #{packageName});
+	</insert>
+	
+	<select id="selectApkInfo" parameterType="String" resultType="ApkInfo" resultMap="ApkInfoMap">
+		select * from apkinfo where md5=#{md5};
+	</select>
+</mapper>

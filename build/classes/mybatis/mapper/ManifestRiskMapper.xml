@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chance.dao.ManifestRiskMapper">
+	<insert id="addManifestRisk" parameterType="ManifestRisk">
+		INSERT INTO manifestrisks(md5, sharedUserId, allowBackup, debuggable, protectionLevel, exported)
+		VALUES(#{md5}, #{sharedUserId}, #{allowBackup}, #{debuggable}, #{protectionLevel}, #{exported});
+	</insert>
+	
+	<select id="selectManifestRisk" parameterType="String" resultType="ManifestRisk">
+		select * from manifestrisks where md5 = #{md5};
+	</select>
+	
+	<select id="selectAllManifestRisks" resultType="ManifestRisk">
+		select * from manifestrisks;
+	</select>
+</mapper>
